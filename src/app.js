@@ -1,14 +1,14 @@
-import path from "path";
-import express from "express";
-import morgan from "morgan";
-import { create } from "express-handlebars";
+const path = require("path");
+const express = require("express");
+const morgan = require("morgan");
+const { create } = require("express-handlebars");
 
-import indexRoutes from "./routes/tasks.routes";
+const indexRoutes = require("./routes/tasks.routes");
+const db = require("./utils/mongoose");
 
 const app = express();
 
 // settings
-app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",
@@ -35,4 +35,10 @@ app.use((req, res, next) => {
   res.status(404).render("404");
 });
 
-export default app;
+db.connect()
+
+const PORT = process.env.PORT || 5002
+app.get('', (req, res) => res.send("Hello World!!!"))
+
+app.listen(PORT, () => console.log(`Hello ${PORT}`))
+

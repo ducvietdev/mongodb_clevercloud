@@ -1,26 +1,19 @@
-import { Router } from "express";
-import {
-  createTask,
-  deleteTask,
-  renderTasks,
-  taskToggleDone,
-  renderTaskEdit,
-  editTask,
-} from "../controllers/tasks.controllers";
+const { Router } = require("express");
+const TaskController = require("../controllers/tasks.controllers");
 
 const router = Router();
 
 // Render all tasks
-router.get("/", renderTasks);
+router.get("/", TaskController.renderTasks);
 
-router.post("/tasks/add", createTask);
+router.post("/tasks/add", TaskController.createTask);
 
-router.get("/tasks/:id/toggleDone", taskToggleDone);
+router.get("/tasks/:id/toggleDone", TaskController.taskToggleDone);
 
-router.get("/tasks/:id/edit", renderTaskEdit);
+router.get("/tasks/:id/edit", TaskController.renderTaskEdit);
 
-router.post("/tasks/:id/edit", editTask);
+router.post("/tasks/:id/edit", TaskController.editTask);
 
-router.get("/tasks/:id/delete", deleteTask);
+router.get("/tasks/:id/delete", TaskController.deleteTask);
 
-export default router;
+module.exports = router;
